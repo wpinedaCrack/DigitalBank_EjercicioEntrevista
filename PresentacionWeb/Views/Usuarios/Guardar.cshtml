@@ -1,0 +1,49 @@
+﻿@model PresentacionWeb.Models.UsuarioModel
+@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Crear Usuario
+    </div>
+</div>
+
+@using (Html.BeginForm("Guardar", "Usuarios", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nombre)
+        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaNacimiento)
+        <input type="date" id="FechaNacimiento" name="FechaNacimiento" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email)
+        <input type="email" id="Email" name="Email" class="form-control" required/>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Sexo)
+        <select id="Sexo" name="Sexo" class="form-control" required>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Passworld, "Clave Provicional")
+        <input type="password" id="Passworld" name="Passworld" class="form-control" required/>
+    </div>
+
+    <br />
+
+    <input type="submit" value="Guardar" class="btn btn-primary" />
+
+    @Html.ActionLink("Volver a la lista", "ListaUsuarios", "Usuarios", null, new { @class = "btn btn-warning" })
+}

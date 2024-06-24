@@ -1,0 +1,58 @@
+﻿@*@model List<PresentacionWeb.ServiceWCFNegocio.Usuario>*@
+@model PresentacionWeb.ViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+
+    <div class="card-body">
+
+
+
+
+
+        @Html.ActionLink("Crear Usuario", "Guardar", "Usuarios", null, new { @class = "btn btn-success" })
+        <hr />
+
+        <form asp-controller="Usuarios" asp-action="ListaUsuarios" method="post">
+            <p>
+                Buscar Nombre: <input type="text" name="buscar" class="form-text" />
+                <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+
+                <input type="submit" name="GenerarReporte" value="Generar Reporte" class="btn btn-sm btn-dark" />
+            </p>
+        </form>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Sexo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Usuarios)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@item.FechaFormateada</td>
+                        <td>@item.Sexo</td>
+                        <td>
+                            @Html.ActionLink("Editar", "Editar", "Usuarios", new { Id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Eliminar", "Eliminar", "Usuarios", new { Id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @{Html.RenderPartial("_paginador", Model);}
+
+    </div>
+</div>
